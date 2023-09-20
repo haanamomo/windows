@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Windows Manual</title>
+
     <style>
         /* Reset styles */
         * {
@@ -127,6 +128,7 @@
         }
 
         article h2 {
+            margin-top: 0;
             font-size: 24px;
         }
 
@@ -149,7 +151,7 @@
         article p {
             margin-top: 8px;
             margin-bottom: 8px;
-
+            line-height: 1.6;
         }
 
         article ul,
@@ -158,7 +160,7 @@
             margin-bottom: 16px;
         }
 
-        article li>p {
+        article li {
             margin-top: 8px;
             margin-bottom: 8px;
         }
@@ -186,6 +188,8 @@
         }
 
         article code {
+            background-color: rgba(243,243,243);
+
             font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
             font-size: 14px;
             padding: 0.2em 0.4em;
@@ -195,14 +199,13 @@
         article pre {
             font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
             font-size: 14px;
-            background-color: rgba(27, 31, 35, .05);
+            background-color: rgba(243,243,243);
             padding: 16px;
             border-radius: 3px;
             overflow: auto;
         }
 
         article pre code {
-            background-color: rgba(27, 31, 35, .05);
 
             display: block;
             padding: 0;
@@ -331,20 +334,29 @@
         </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     <script>
         const blogContainer = document.getElementById('blogs');
 
-        fetch('blogs.html')
+        fetch('blogs.md')
             .then(response => response.text())
-            .then(html => {
-                blogContainer.innerHTML = html;
+            .then(blogs => {
+                const blogHtml = blogs.split(/^\#\# /gm).map(blog => {
+                    console.log(blog)
+                    if (blog.trim()) {
+                        const content = marked.parse('## ' + blog);
+                        return `<article>${content}</article>`;
+                    }
+                }).join('');
+
+                blogContainer.innerHTML = blogHtml;
                 const articles = blogContainer.querySelectorAll('article');
 
                 // Create a menu item for each article
                 const menu = document.querySelector('.sidebar');
                 articles.forEach((article, index) => {
                     article.id = `blog${index + 1}`;
-                    console.log(article.id)
                     const menuItem = document.createElement('a');
                     menuItem.href = `#${article.id}`;
                     menuItem.textContent = article.querySelector('h2').textContent;
