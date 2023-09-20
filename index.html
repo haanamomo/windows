@@ -332,7 +332,7 @@
     <script>
         const blogContainer = document.getElementById('blogs');
 
-        fetch('/blogs.html')
+        fetch('blogs.html')
             .then(response => response.text())
             .then(html => {
                 blogContainer.innerHTML = html;
