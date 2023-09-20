@@ -43,10 +43,10 @@
             padding: 1rem;
         }
 
-        .main {
+        #blogs {
             flex: 1;
-            padding: 1rem;
             background-color: #fff;
+            padding: 40px;
         }
 
         header {
@@ -85,13 +85,7 @@
             margin-bottom: 3rem;
         }
 
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
-            margin-top: auto;
-        }
+
 
         .hidden {
             display: none;
@@ -258,6 +252,40 @@
             background-color: yellow;
         }
 
+        footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px 30px;
+
+            background-color: #333;
+            color: #fff;
+            margin-top: auto;
+        }
+
+        .footer-column {
+            flex-basis: calc(50% - 15px);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 4px;
+        }
+
+        .footer-column a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
 
         /* Media queries */
         @media screen and (min-width: 768px) {
@@ -273,9 +301,7 @@
                 left: 0;
             }
 
-            .main {
-                padding: 40px;
-            }
+
         }
     </style>
 </head>
@@ -289,46 +315,50 @@
         <header>
             <h1>Linux Manual</h1>
         </header>
-        <div class="main">
-            <article id="blog1">
-<h2>windows轻量应用</h2>
-<ul>
-<li>clibor：剪贴板历史</li>
-<li>flashpad: 笔记软件</li>
-<li>MassiGra：看图软件</li>
-</ul>
-</article>
-            <link rel="import" href="blogs.html">
+        <div id="blogs">
         </div>
         <footer>
-            <p>Copyright &copy; 2021 Linux Manual</p>
+            <div class="footer-column">
+
+                <ul>
+                    <li><a href="https://haanamomo.github.io/linux/">Linux Manual</a></li>
+                    <li><a href="https://haanamomo.github.io/windows/">Windows Manual</a></li>
+
+                </ul>
+            </div>
         </footer>
     </div>
 
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-            // Get all articles on the page
-            const articles = document.querySelectorAll('article');
+        const blogContainer = document.getElementById('blogs');
 
-            // Create a menu item for each article
-            const menu = document.querySelector('.sidebar');
-            articles.forEach((article, index) => {
-                const menuItem = document.createElement('a');
-                menuItem.href = `#${article.id}`;
-                menuItem.textContent = article.querySelector('h2').textContent;
-                menuItem.classList.add('blog-link');
+        fetch('/blogs.html')
+            .then(response => response.text())
+            .then(html => {
+                blogContainer.innerHTML = html;
+                const articles = blogContainer.querySelectorAll('article');
 
-                // Add the menu item to the menu container
-                menu.appendChild(menuItem);
+                // Create a menu item for each article
+                const menu = document.querySelector('.sidebar');
+                articles.forEach((article, index) => {
+                    const menuItem = document.createElement('a');
+                    menuItem.href = `#${article.id}`;
+                    menuItem.textContent = article.querySelector('h2').textContent;
+                    menuItem.classList.add('blog-link');
 
-                // Set the first menu item as active by default
-                if (index === 0) {
-                    menuItem.classList.add('active');
-                }
+                    // Add the menu item to the menu container
+                    menu.appendChild(menuItem);
+
+                    // Set the first menu item as active by default
+                    if (index === 0) {
+                        menuItem.classList.add('active');
+                    }
+
+                });
 
             });
-        });
 
+    
         // Toggle active class on blog links
         const blogLinks = document.querySelectorAll('.blog-link');
         blogLinks.forEach((link) => {
@@ -338,7 +368,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const activeLink = document.querySelector('.blog-link.active');
                 activeLink.classList.remove('active');
                 link.classList.add('active');
-                const activeArticle = document.querySelector('.main article:not(.hidden)');
+                const activeArticle = document.querySelector('#blogs article:not(.hidden)');
                 activeArticle.classList.add('hidden');
                 const articleToShow = document.querySelector(articleId);
                 articleToShow.classList.remove('hidden');
