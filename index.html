@@ -360,24 +360,24 @@
 
                 });
 
+                const blogLinks = document.querySelectorAll('.blog-link');
+
+                blogLinks.forEach((link) => {
+                    link.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const articleId = link.getAttribute('href');
+                        const activeLink = document.querySelector('.blog-link.active');
+                        activeLink.classList.remove('active');
+                        link.classList.add('active');
+                        const activeArticle = document.querySelector('#blogs article:not(.hidden)');
+                        activeArticle.classList.add('hidden');
+                        const articleToShow = document.querySelector(articleId);
+                        articleToShow.classList.remove('hidden');
+                    });
+                });
+
             });
 
-
-        // Toggle active class on blog links
-        const blogLinks = document.querySelectorAll('.blog-link');
-        blogLinks.forEach((link) => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-                const articleId = link.getAttribute('href');
-                const activeLink = document.querySelector('.blog-link.active');
-                activeLink.classList.remove('active');
-                link.classList.add('active');
-                const activeArticle = document.querySelector('#blogs article:not(.hidden)');
-                activeArticle.classList.add('hidden');
-                const articleToShow = document.querySelector(articleId);
-                articleToShow.classList.remove('hidden');
-            });
-        });
     </script>
 </body>
 
