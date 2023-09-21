@@ -1,6 +1,6 @@
-## 快捷键
+# 快捷键
 
-### win 
+## win 
 
 `win` 搜索
 
@@ -17,17 +17,17 @@
 `win + z` 		分屏管理
 
 
-### edge 
+## edge 
 
 `f11` 		全屏
 
 `f9` 		退出沉浸式阅读
 
-### massigra
+## massigra
 
 `f`		图片放大
 
-### flashpad
+## flashpad
 
 `alt + z` 		呼出
 
@@ -35,7 +35,7 @@
 
 `control -`	分隔符
 
-## windows应用
+# windows应用
 
 * aida64: 硬件检测
 * Everything ：搜索文件
@@ -48,7 +48,7 @@
 * flashpad: 笔记软件
 * MassiGra：看图软件
 
-## 安装http-server
+# 安装http-server
 
 
 1.  [官网](https://nodejs.org/en/download)下载node.js
@@ -56,13 +56,13 @@
 3.  `npm install -g http-server`
 4.  `cd <dir>; http-server`
 
-## 画图取色
+# 画图取色
 
 * `win + shift + s`截图后粘贴到画图里
 * 用取色器取色
 * 点击`编辑颜色`查看rgb值
 
-## Git Bash安装zsh
+# Git Bash安装zsh
 
 * 去[Git官网](https://git-scm.com/download/win)下载并安装Git Bash。
 * 下载[.zst压缩包](https://packages.msys2.org/package/zsh?repo=msys&variant=x86_64), 在`File:`后面
@@ -79,7 +79,7 @@
 
 - [powerlevel10k](https://github.com/romkatv/powerlevel10k)
 
-## ffmpeg
+# ffmpeg
 
 ffmpeg批量裁剪音频
 
@@ -89,15 +89,15 @@ mkdir outdir;
 Foreach ($i in @(Get-ChildItem *.mp3)) { ffmpeg -i $i -ss 2 outdir\$(Split-Path $i -leaf)}
 ```
 
-## 无权限修改文件
+# 无权限修改文件
 
 点击文件，右键`properties`，选择第二个`Security`, 选择最后一个`Users(你的用户名)`，在下面添加`Modify`和`Write`的权限
 
-## 面板添加Path
+# 面板添加Path
 
 搜索“Environment”，点击“Advanced-Environment Variables”，选中Path，点击Edit，点击New
 
-## Powershell修改Path
+# Powershell修改Path
 
 * 显示：`$ENV:Path.Split(";")`
 * 追加：`$ENV:Path="C:\Program Files\xxx;"+$ENV:Path`
