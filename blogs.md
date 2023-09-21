@@ -1,3 +1,12 @@
+# 命令行查看配置
+
+```sh
+wmic cpu get NumberOfCores
+
+# 按内存条显示，一般看第一个数字
+wmic memorychip get capacity
+```
+
 # 快捷键
 
 ## win 
@@ -103,3 +112,8 @@ Foreach ($i in @(Get-ChildItem *.mp3)) { ffmpeg -i $i -ss 2 outdir\$(Split-Path 
 * 追加：`$ENV:Path="C:\Program Files\xxx;"+$ENV:Path`
 * 删除：`Set-Item ENV:Path $ENV:Path.Replace("<somePath>;", "")`
 * 替换：`Set-Item ENV:Path $ENV:Path.Replace("<old>", "<new>")`
+
+# 局域网共享文件
+
+* SMB协议，使用445端口
+* 如果是用Microsoft账户登录，则账号是Microsoft账户名， 密码是Microsoft账户密码
