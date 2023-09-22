@@ -115,5 +115,9 @@ Foreach ($i in @(Get-ChildItem *.mp3)) { ffmpeg -i $i -ss 2 outdir\$(Split-Path 
 
 ## 局域网共享文件
 
-* SMB协议，使用445端口
-* 如果是用Microsoft账户登录，则账号是Microsoft账户名， 密码是Microsoft账户密码
+* 首先点击文件浏览器中的网络，开启共享功能。
+* 找到局域网内的计算机，通过命令行内的`ipconfig`查找ip，或者输入电脑名。如果想要修改为好记一点的电脑名，按`win`后搜索`计算机`或者`重命名`
+* 在文件浏览器中输入`\\ip`或者`\\name`
+* 输入本地账户的账号密码。如果是用Microsoft账户登录，则账号是Microsoft账户名， 密码是Microsoft账户密码
+
+如果上述失败，在控制面板中找到`程序-启用或关闭Windows功能`，勾选SMB及子选项。
